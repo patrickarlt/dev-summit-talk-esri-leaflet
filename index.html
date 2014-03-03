@@ -25,8 +25,24 @@
 
 		<link rel="stylesheet" href="lib/esri-leaflet-demographics/esri-leaflet-legend.css">
 
+		<style>
+			.reveal .leaflet-popup {
+				color: black;
+			}
+			.reveal .leaflet-popup-close-button:hover {
+				border: none;
+			}
+			.reveal .geocoder-control-suggestions {
+				margin-top: 10px;
+			}
+			.reveal .geocoder-control-suggestion {
+				margin: 0;
+				color: black;
+			}
+		</style>
+
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/solarized.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -116,38 +132,59 @@
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Leaflet in 5 Minutes - Tiles</h4>
-					</header>
+							<pre><code class="javascript">// create a map in the "map" div, set the view to a given lat/lng and zoom
+var map = L.map('map').setView([ 33.8253818684, -116.5369606018], 16);
+
+// add tiles from OpenStreetMap
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+}).addTo(map);</code></pre>
+							<div id="map-leaflet-tiles" style="height:50vh;"></div>
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Leaflet in 5 Minutes - Stuff On A Map</h4>
-					</header>
+							<pre><code class="javascript">// create a marker and add it to the map
+var marker = new L.Marker([  33.82538186847268, -116.53696060180664]).addTo(map2);
+
+// create a polygon and add it to the map
+var polygon = new L.Polygon([[33.82667422214127, -116.53944969177246],[33.82485600863029, -116.53942823410033],[33.82476687952293, -116.54174566268921],[33.82325167048341, -116.54170274734497],[33.82325167048341, -116.537024974823],[33.8267098730001, -116.53708934783934],[33.82667422214127, -116.53944969177246]]).addTo(map2);</code></pre>
+							<div id="map-leaflet-layers" style="height:50vh;"></div>
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Leaflet in 5 Minutes - Popups</h4>
-					</header>
+					<pre><code class="javascript">// bind a popup to our marker
+marker.bindPopup("&lt;p&gt;Welome to Dev Summit!&lt;p&gt;");
+
+// bind a popup to our polygon
+polygon.bindPopup("&lt;p&gt;Palm Springs Convention Center&lt;p&gt;");</code></pre>
+					<div id="map-leaflet-popups" style="height:50vh;"></div>
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Leaflet in 5 Minutes - Interaction</h4>
-					</header>
+					<pre><code class="javascript">// listen for click events on the marker
+marker.on("click", function(e){
+	alert("You clicked on the marker at " + e.target.getLatLng());
+});
+
+// listen for click events on the polygon
+polygon.on("click", function(e){
+	alert("You clicked on the polygon at " + e.latlng);
+});</code></pre>
+					<div id="map-leaflet-interaction" style="height:50vh;"></div>
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Leaflet in 5 Minutes - Data</h4>
-					</header>
+					<h2>Leaflets API</h2>
+					<ul>
+						<li class="fragment">Simple - Uses Lat/Lng everywhere, no projections</li>
+						<li class="fragment">Literal - Obvious class and method names</li>
+						<li class="fragment">Consistant - Strict adherance to its own standards</li>
+						<li class="fragment">Fully Featured - Styling, Popups, Events</li>
+					</ul>
 				</section>
 
 				<section>
-					<h2>And Finally...</h2>
-					<h4 class="fragment">Plugins!</h4>
+					<h1 class="fragment">Plugins!</h1>
 					<p class="fragment">So many plugins...</p>
 				</section>
 
@@ -158,12 +195,8 @@
 						<li class="fragment">Clustering <a href="https://github.com/Leaflet/Leaflet.markercluster">https://github.com/Leaflet/Leaflet.markercluster</a></li>
 						<li class="fragment">Labeling <a href="https://github.com/Leaflet/Leaflet.label">https://github.com/Leaflet/Leaflet.label</a></li>
 						<li class="fragment">Data Formats <a href="https://github.com/mapbox/leaflet-omnivore">https://github.com/mapbox/leaflet-omnivore</a></li>
-						<li class="fragment">More ... <a href="http://leafletjs.com/plugins.html">http://leafletjs.com/plugins.html</a></li>
+						<li class="fragment">And More ... <a href="http://leafletjs.com/plugins.html">http://leafletjs.com/plugins.html</a></li>
 					</ul>
-				</section>
-
-				<section>
-					<h2>So whats missing?</h2>
 				</section>
 
 				<section>
@@ -171,56 +204,91 @@
 					<p>Leaflet plugins for ArcGIS</p>
 				</section>
 
+				<section class="left">
+					<pre><code class="javascript">// create a map
+var map = new L.Map("map").setView([ 33.8253818684, -116.5369606018], 12);
+
+// add an ArcGIS Basemap
+L.esri.basemapLayer("Topographic").addTo(map);</code></pre>
+					<div id="esri-leaflet-basemap" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+					<pre><code class="javascript">// create a map
+var map = L.map('map').setView([46.3, -60.7], 9);
+
+// add a tile layer from ArcGIS Online or ArcGIS Server
+var charts = new L.esri.TiledMapLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Specialty/World_Navigation_Charts/MapServer").addTo(map);</code></pre>
+					<div id="esri-leaflet-tiles" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+					<pre><code class="javascript">var map = L.map('map').setView([36.272228, -116.817001], 7);
+
+L.esri.basemapLayer("Gray").addTo(map);
+
+var parks = new L.esri.DynamicMapLayer("http://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer").addTo(map);</code></pre>
+					<div id="esri-leaflet-dynamic" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+					<pre><code class="javascript">L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Parks_pdx/FeatureServer/0", {
+	style: function (feature) {
+	  return { color: "#70ca49", weight: 2 };
+	},
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(feature.properties.NAME + "&lt;br&gt;" + feature.properties.ACRES + " Acres&lt;br&gt;Property ID "+feature.properties.PROPERTYID));
+  }
+}).addTo(map);</code></pre>
+					<div id="esri-leaflet-featurelayer" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+<pre><code class="javascript">L.esri.clusteredFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/stops/FeatureServer/0", {
+	onEachMarker: function(feature, marker) {
+    marker.bindPopup(feature.properties.stop_name+"<br>Stop ID: "+feature.properties.stop_id+"<br>"+feature.properties.stop_desc)
+  }
+}).addTo(map);</code></pre>
+					<div id="esri-leaflet-clustering" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+<pre><code class="javascript">var heat = new L.esri.HeatMapFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Graffiti_Locations3/FeatureServer/0", {
+  radius: 12,
+  gradient: {
+    0.4: "#ffeda0",
+    0.65: "#feb24c",
+    1: "#f03b20"
+  }
+}).addTo(map);</code></pre>
+					<div id="esri-leaflet-heatmap" style="height:50vh;"></div>
+				</section>
+
+				<section class="left">
+					<pre><code class="javascript">var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+// listen for the results event and add every result to the map
+searchControl.on("results", function(e){
+	console.log(e.results);
+});</code></pre>
+					<div id="esri-leaflet-geocoding" style="height:50vh;"></div>
+				</section>
+
 				<section>
-					<img src="oh-please-tell-me-more.jpg" alt="Tell me more">
+<pre><code class="javascript">var layer = L.esri.Demographics.demographicLayer('USAHealthCareSpending', {
+    token: "A ArcGIS Online Token"
+}).addTo(map);</code></pre>
+					<img src="demographic-map.png" alt="USA Health Care Spending">
 				</section>
 
 				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Esri Tiles</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Your Tiles</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Dynamic Map Layers</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Feature Layers</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Clustering</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Heatmaps</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Geocoding</h4>
-					</header>
-				</section>
-
-				<section class="left">
-					<header>
-						<h4>Esri Leaflet In 5 Minutes - Demographic Maps</h4>
-					</header>
+					<h1>Esri Leaflet</h1>
+					<ul>
+						<li>Supports a wide variety of ArcGIS Services</li>
+						<li>Clean Simple API</li>
+						<li>Growing Fast</li>
+						<li>Open Source</li>
+					</ul>
 				</section>
 
 				<section>
@@ -255,16 +323,15 @@
 				</section>
 
 				<section>
-					<h1>The Goal</h1>
-					<p>A complete toolkit for working with ArcGIS services in Leafet.</p>
-				</section>
-
-				<section>
-					<h1>You are my dev team</h1>
+					<h2>You are my dev team</h2>
 					<p><a href="https://github.com/esri/esri-leaflet">https://github.com/esri/esri-leaflet</a></p>
+					<br>
+					<p><a href="https://github.com/esri/esri-leaflet">API Roadmap</a></p>
 				</section>
 
 				<section class="left">
+					<h1>Thanks!</h1>
+					<br>
 					<p>Twitter : <a href="http://twitter.com/patrickarlt">@patrickarlt</a></p>
 					<br>
 					<p>GitHub : <a href="http://github.com/patrickarlt">http://github.com/patrickarlt</a></p>
@@ -333,8 +400,178 @@
 				]
 			});
 
-			var map1 = L.map("map1").setView([51.505, -0.09], 13);
-			var tiles = L.esri.basemapLayer("Topographic").addTo(map1);
+			(function(){
+				var map = L.map('map-leaflet-tiles').setView([ 33.8253818684, -116.5369606018], 16);
+
+				// add tiles from OpenStreetMap
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+				}).addTo(map);
+			})();
+
+			(function(){
+				var map = L.map('map-leaflet-layers').setView([ 33.8253818684, -116.5369606018], 16);
+
+				// add tiles from OpenStreetMap
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+				}).addTo(map);
+
+				var marker = new L.Marker([ 33.8253818684, -116.5369606018]).addTo(map);
+
+				var polygon = new L.Polygon([
+					[33.82667422214127, -116.53944969177246],
+					[33.82485600863029, -116.53942823410033],
+					[33.82476687952293, -116.54174566268921],
+					[33.82325167048341, -116.54170274734497],
+					[33.82325167048341, -116.537024974823],
+					[33.8267098730001, -116.53708934783934],
+					[33.82667422214127, -116.53944969177246]
+				]).addTo(map);
+			})();
+
+			(function(){
+				var map = L.map('map-leaflet-popups').setView([ 33.8253818684, -116.5369606018], 16);
+
+				// add tiles from OpenStreetMap
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+				}).addTo(map);
+
+				var marker = new L.Marker([ 33.8253818684, -116.5369606018]).addTo(map);
+
+				var polygon = new L.Polygon([
+					[33.82667422214127, -116.53944969177246],
+					[33.82485600863029, -116.53942823410033],
+					[33.82476687952293, -116.54174566268921],
+					[33.82325167048341, -116.54170274734497],
+					[33.82325167048341, -116.537024974823],
+					[33.8267098730001, -116.53708934783934],
+					[33.82667422214127, -116.53944969177246]
+				]).addTo(map);
+
+				marker.bindPopup("<p>Welome to Dev Summit!</p>");
+
+				// bind a popup to our polygon
+				polygon.bindPopup("<p>Palm Springs Convention Center</p>");
+			})();
+
+			(function(){
+				var map = L.map('map-leaflet-interaction').setView([ 33.8253818684, -116.5369606018], 16);
+
+				// add tiles from OpenStreetMap
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+				}).addTo(map);
+
+				var marker = new L.Marker([ 33.8253818684, -116.5369606018]).addTo(map);
+
+				var polygon = new L.Polygon([
+					[33.82667422214127, -116.53944969177246],
+					[33.82485600863029, -116.53942823410033],
+					[33.82476687952293, -116.54174566268921],
+					[33.82325167048341, -116.54170274734497],
+					[33.82325167048341, -116.537024974823],
+					[33.8267098730001, -116.53708934783934],
+					[33.82667422214127, -116.53944969177246]
+				]).addTo(map);
+
+				marker.bindPopup("<p>Welome to Dev Summit!</p>");
+
+				// bind a popup to our polygon
+				polygon.bindPopup("<p>Palm Springs Convention Center</p>");
+
+				marker.on("click", function(e){
+					alert("You clicked on the marker at " + e.target.getLatLng());
+				});
+
+				polygon.on("click", function(e){
+					alert("You clicked on the polygon at " + e.latlng);
+				});
+			})();
+
+			(function(){
+				var map = new L.Map("esri-leaflet-basemap").setView([ 33.8253818684, -116.5369606018], 12);
+
+				L.esri.basemapLayer("Topographic").addTo(map);
+			})();
+
+			(function(){
+	      var map = L.map('esri-leaflet-tiles').setView([46.3, -60.7], 9);
+	      var charts = new L.esri.TiledMapLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Specialty/World_Navigation_Charts/MapServer").addTo(map);
+			})();
+
+			(function(){
+	      var map = L.map('esri-leaflet-dynamic').setView([36.272228, -116.817001], 7);
+
+	      L.esri.basemapLayer("Gray").addTo(map);
+
+	      var parks = new L.esri.DynamicMapLayer("http://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer").addTo(map);
+			})();
+
+			(function(){
+	     	var map = L.map('esri-leaflet-featurelayer').setView([45.528, -122.680], 13);
+
+	      L.esri.basemapLayer("Gray").addTo(map);
+				L.esri.basemapLayer("GrayLabels").addTo(map);
+
+	      L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Parks_pdx/FeatureServer/0", {
+	       style: function (feature) {
+	          return { color: "#70ca49", weight: 2 };
+	        },
+          onEachFeature: function (feature, layer) {
+	          layer.bindPopup(feature.properties.NAME + "<br>" + feature.properties.ACRES + " Acres<br>Property ID "+feature.properties.PROPERTYID);
+	        }
+	      }).addTo(map);
+			})();
+
+			(function(){
+				var map = L.map('esri-leaflet-clustering').setView([45.5276173643906, -122.66736388203228], 13);
+
+				L.esri.basemapLayer("Gray").addTo(map);
+				L.esri.basemapLayer("GrayLabels").addTo(map);
+
+				L.esri.clusteredFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/stops/FeatureServer/0", {
+				  onEachMarker: function(feature, marker) {
+				    marker.bindPopup(feature.properties.stop_name+"<br>Stop ID: "+feature.properties.stop_id+"<br>"+feature.properties.stop_desc)
+				  }
+				}).addTo(map);
+			}());
+
+			(function(){
+		    var map = new L.Map("esri-leaflet-heatmap").setView([ 40.70484714530104, -73.94674301147461], 14);
+
+	      L.esri.basemapLayer("Gray").addTo(map);
+	      L.esri.basemapLayer("GrayLabels").addTo(map);
+
+				var heat = new L.esri.HeatMapFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Graffiti_Locations3/FeatureServer/0", {
+	        radius: 12
+	      }).addTo(map);
+			}())
+
+			(function(){
+	      var map = L.map('esri-leaflet-geocoding').setView([45.5165, -122.6764], 12);
+
+	      var tiles = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+	      // create the geocoding control and add it to the map
+	      var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+	      // create an empty layer group to store the results and add it to the map
+	      var results = new L.LayerGroup().addTo(map);
+
+	      // listen for the results event and add every result to the map
+	      searchControl.on("results", function(data){
+	        results.clearLayers();
+	        for (var i = data.results.length - 1; i >= 0; i--) {
+	          results.addLayer(L.marker(data.results[i].latlng));
+	        };
+	      });
+
+	      searchControl.on("error", function(e){
+	        console.log(e);
+	      });
+			}());
 		</script>
 
 	</body>
