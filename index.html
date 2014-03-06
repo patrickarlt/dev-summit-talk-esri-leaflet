@@ -56,6 +56,8 @@
 
 	<body>
 
+		<a href="https://github.com/patrickarlt/dev-summit-talk-esri-leaflet"><img style="z-index: 1000; position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+
 		<div class="reveal">
 
 			<div class="slides">
@@ -63,11 +65,11 @@
 				<section class="left">
 					<h1>Mapping with Leaflet</h1>
 					<h3>Patrick Arlt</h3>
-					<p>Experiance Developer - Esri Portland R&D Center</p>
+					<p>Experience Developer - Esri Portland R&D Center</p>
 					<p><a href="http://twitter.com/patrickarlt">@patrickarlt</a> - <a href="http://patrickarlt.github.io/dev-summit-talk-esri-leaflet/">http://patrickarlt.github.io/dev-summit-talk-esri-leaflet/</a></p>
 				</section>
 
-				<section class="left">
+				<section>
 					<h2>Who am I?</h2>
 					<ul>
 						<li>Joined ESRI in 2012</li>
@@ -79,10 +81,7 @@
 
 				<section>
 					<h2>How I approch the JS API</h2>
-				</section>
-
-				<section>
-					<img src="framework.jpg" alt="As a framework">
+					<h3 class="fragment">The JS API is a framework not a library</h3>
 				</section>
 
 				<section class="left">
@@ -98,7 +97,7 @@
 							</ul>
 						</div>
 						<div class="block">
-							<h3>Libraries</h3>
+							<h3 class="fragment">Libraries</h3>
 							<ul>
 								<li class="fragment">Single purpose</li>
 								<li class="fragment">Flexible</li>
@@ -109,24 +108,22 @@
 					</div>
 				</section>
 
-				<section class="left">
+				<section>
 					<h2>The JS API is a framework for building GIS apps</h2>
 					<ul>
-						<li>Defines the what you can do and tells you how to do it</li>
-						<li>Dojo is the framework, the JS API is the library</li>
-						<li>They cannot be seperated</li>
+						<li class="fragment">Defines the what you can do and tells you how to do it</li>
+						<li class="fragment">Dojo is the framework, the JS API is the library</li>
+						<li class="fragment">API is overly complex and non-intuitive</li>
+						<li class="fragment">Diffucult to seperate Dojo from the JS API</li>
 					</ul>
 				</section>
 
 				<section>
 					<h1>Leaflet</h1>
-				</section>
-
-				<section class="left">
-					<h3>What is Leaflet?</h3>
 					<ul>
 						<li class="fragment">Open source mapping <strong>library</strong></li>
-						<li class="fragment">Focused on a small, clear, extensible API</li>
+						<li class="fragment">Focused on a small (33kb), extensible API</li>
+						<li class="fragment">Simple and clear API</li>
 						<li class="fragment">Huge plugin eco system</li>
 					</ul>
 				</section>
@@ -180,6 +177,7 @@ polygon.on("click", function(e){
 						<li class="fragment">Literal - Obvious class and method names</li>
 						<li class="fragment">Consistant - Strict adherance to its own standards</li>
 						<li class="fragment">Fully Featured - Styling, Popups, Events</li>
+						<li class="fragment">Extendable - Classes, events, lots of utilities</li>
 					</ul>
 				</section>
 
@@ -325,19 +323,15 @@ searchControl.on("results", function(e){
 				<section>
 					<h2>You are my dev team</h2>
 					<p><a href="https://github.com/esri/esri-leaflet">https://github.com/esri/esri-leaflet</a></p>
-					<br>
-					<p><a href="https://github.com/esri/esri-leaflet">API Roadmap</a></p>
+					<p><a href="https://github.com/Esri/esri-leaflet-geocoder">https://github.com/Esri/esri-leaflet-geocoder</a></p>
+					<p><a href="https://github.com/Esri/esri-leaflet-demographic-layer">https://github.com/Esri/esri-leaflet-demographic-layer</a></p>
+					<p><a href="https://github.com/Esri/esri-leaflet/wiki/v0.1.0-API-Roadmap">API Roadmap</a></p>
 				</section>
 
 				<section class="left">
 					<h1>Thanks!</h1>
-					<br>
 					<p>Twitter : <a href="http://twitter.com/patrickarlt">@patrickarlt</a></p>
-					<br>
-					<p>GitHub : <a href="http://github.com/patrickarlt">http://github.com/patrickarlt</a></p>
-					<br>
 					<p>Slides : <a href="http://patrickarlt.github.io/dev-summit-talk-esri-leaflet/">http://patrickarlt.github.io/dev-summit-talk-esri-leaflet/</a></p>
-					<br>
 					<div class="center-text">
 						<img src="esri-logo.png" alt="Esri" width="280" height="118" >
 					</div>

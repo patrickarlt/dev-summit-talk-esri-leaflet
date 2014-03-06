@@ -57,6 +57,12 @@ body {
   right: 0; }
 
 /*********************************************
+ * Type
+ *********************************************/
+.reveal p, .reveal ul, .reveal ol {
+  margin: 1em 0; }
+
+/*********************************************
  * SLIDES
  *********************************************/
 .reveal .slides section.left {
@@ -69,8 +75,9 @@ body {
   border-bottom: 2px solid;
   margin-bottom: 0.75em;
   padding-bottom: 0.5em; }
-  .reveal header h1, .reveal header h2, .reveal header h3, .reveal header h4, .reveal header h5, .reveal header h6 {
-    padding: 0; }
+
+.reveal header h1, .reveal header h2, .reveal header h3, .reveal header h4, .reveal header h5, .reveal header h6 {
+  padding: 0; }
 
 .reveal h1,
 .reveal h2,
@@ -100,6 +107,13 @@ body {
 
 .reveal h4 {
   font-size: 1em; }
+
+/*********************************************
+ * BLOCKQUOTE
+ *********************************************/
+.reveal blockquote {
+  font-size: 1.55em;
+  line-height: 1.25em; }
 
 /*********************************************
  * LINKS
@@ -206,9 +220,10 @@ body {
 .reveal ul {
   margin: 0;
   display: block; }
-  .reveal ol li,
-  .reveal ul li {
-    margin-bottom: 1em; }
+
+.reveal ol li,
+.reveal ul li {
+  margin-bottom: 1em; }
 
 /*********************************************
  * BLOCK GROUPS
@@ -220,8 +235,9 @@ body {
   margin-right: -1em;
   text-align: left;
   display: block; }
-  .reveal .block-group.center {
-    text-align: center; }
+
+.reveal .block-group.center {
+  text-align: center; }
 
 .reveal .block {
   position: relative;
