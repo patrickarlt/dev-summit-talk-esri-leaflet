@@ -150,20 +150,12 @@ var polygon = new L.Polygon([[33.82667422214127, -116.53944969177246],[33.824856
 
 				<section class="left">
 					<pre><code class="javascript">// bind a popup to our marker
-marker.bindPopup("&lt;p&gt;Welome to Dev Summit!&lt;p&gt;");
-
-// bind a popup to our polygon
-polygon.bindPopup("&lt;p&gt;Palm Springs Convention Center&lt;p&gt;");</code></pre>
+marker.bindPopup("&lt;p&gt;Welome to Dev Summit!&lt;p&gt;");</code></pre>
 					<div id="map-leaflet-popups" style="height:50vh;"></div>
 				</section>
 
 				<section class="left">
-					<pre><code class="javascript">// listen for click events on the marker
-marker.on("click", function(e){
-	alert("You clicked on the marker at " + e.target.getLatLng());
-});
-
-// listen for click events on the polygon
+					<pre><code class="javascript">// listen for click events on the polygon
 polygon.on("click", function(e){
 	alert("You clicked on the polygon at " + e.latlng);
 });</code></pre>
@@ -207,7 +199,7 @@ polygon.on("click", function(e){
 var map = new L.Map("map").setView([ 33.8253818684, -116.5369606018], 12);
 
 // add an ArcGIS Basemap
-L.esri.basemapLayer("Topographic").addTo(map);</code></pre>
+var tiles = L.esri.basemapLayer("Topographic").addTo(map);</code></pre>
 					<div id="esri-leaflet-basemap" style="height:50vh;"></div>
 				</section>
 
@@ -250,14 +242,9 @@ var parks = new L.esri.DynamicMapLayer("http://mapservices.nps.gov/arcgis/rest/s
 					<div id="esri-leaflet-clustering" style="height:50vh;"></div>
 				</section>
 
-				<section class="left">
+				<section class="left" data-state="heatmap">
 <pre><code class="javascript">var heat = new L.esri.HeatMapFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Graffiti_Locations3/FeatureServer/0", {
-  radius: 12,
-  gradient: {
-    0.4: "#ffeda0",
-    0.65: "#feb24c",
-    1: "#f03b20"
-  }
+  radius: 12
 }).addTo(map);</code></pre>
 					<div id="esri-leaflet-heatmap" style="height:50vh;"></div>
 				</section>
@@ -445,9 +432,6 @@ searchControl.on("results", function(e){
 				]).addTo(map);
 
 				marker.bindPopup("<p>Welome to Dev Summit!</p>");
-
-				// bind a popup to our polygon
-				polygon.bindPopup("<p>Palm Springs Convention Center</p>");
 			})();
 
 			(function(){
@@ -471,13 +455,6 @@ searchControl.on("results", function(e){
 				]).addTo(map);
 
 				marker.bindPopup("<p>Welome to Dev Summit!</p>");
-
-				// bind a popup to our polygon
-				polygon.bindPopup("<p>Palm Springs Convention Center</p>");
-
-				marker.on("click", function(e){
-					alert("You clicked on the marker at " + e.target.getLatLng());
-				});
 
 				polygon.on("click", function(e){
 					alert("You clicked on the polygon at " + e.latlng);
@@ -533,14 +510,16 @@ searchControl.on("results", function(e){
 			}());
 
 			(function(){
-		    var map = new L.Map("esri-leaflet-heatmap").setView([ 40.70484714530104, -73.94674301147461], 14);
+				Reveal.addEventListener( 'heatmap', function() {
+					var map = new L.Map("esri-leaflet-heatmap").setView([ 40.70484714530104, -73.94674301147461], 14);
 
-	      L.esri.basemapLayer("Gray").addTo(map);
-	      L.esri.basemapLayer("GrayLabels").addTo(map);
+		      L.esri.basemapLayer("Gray").addTo(map);
+		      L.esri.basemapLayer("GrayLabels").addTo(map);
 
-				var heat = new L.esri.HeatMapFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Graffiti_Locations3/FeatureServer/0", {
-	        radius: 12
-	      }).addTo(map);
+					var heat = new L.esri.HeatMapFeatureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Graffiti_Locations3/FeatureServer/0", {
+		        radius: 12
+		      }).addTo(map);
+				}, false );
 			}())
 
 			(function(){
