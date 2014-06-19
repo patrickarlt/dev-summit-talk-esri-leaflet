@@ -224,7 +224,7 @@ var parks = new L.esri.DynamicMapLayer("http://mapservices.nps.gov/arcgis/rest/s
 				</section>
 
 				<section class="left">
-					<pre><code class="javascript">L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Parks_pdx/FeatureServer/0", {
+					<pre><code class="javascript">L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0", {
 	style: function (feature) {
 	  return { color: "#70ca49", weight: 2 };
 	},
@@ -489,7 +489,7 @@ searchControl.on("results", function(e){
 	      L.esri.basemapLayer("Gray").addTo(map);
 				L.esri.basemapLayer("GrayLabels").addTo(map);
 
-	      L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Parks_pdx/FeatureServer/0", {
+	      L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0", {
 	       style: function (feature) {
 	          return { color: "#70ca49", weight: 2 };
 	        },
